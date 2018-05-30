@@ -6,12 +6,12 @@
 # Created Time: Thu 06 Nov 2014 06:31:50 PM CST
 #########################################################################
 #Define Path    
-VIMRC=~/.vimrc 
+VIMRC=$HOME/.vimrc 
 VIM_FILE=./packages/vim*
 
 function prompt() 
 {
-    tar -zxf ${VIM_FILE} -C ~/
+    tar -zxf ${VIM_FILE} -C $HOME/
     read -p "Please input your name:" AUTHOR      
     sed -i "s/Bill/$AUTHOR/g" $VIMRC     
     read -p "Please input your E-mail:" MAIL_AUTHOR     
@@ -23,6 +23,7 @@ function prompt()
 # install_ctags $install_dir
 function install_ctags() 
 {
+    mkdir -p "$1"
     tar -zxf ctags.tar.gz -C "$1"
     chmod 755 "$1/ctags"
 }
@@ -41,9 +42,7 @@ function addBash()
 function install_bin()
 {
     # install go bin
-    if [ ! -d "$1" ];then
-        mkdir -p "$1"
-    fi       
+    mkdir -p "$1"
 
     for f in $(ls ../vim-go-ide-bin/)
     do       
